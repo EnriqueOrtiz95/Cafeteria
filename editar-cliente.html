@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria - Contacto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bona+Nova&family=Raleway:wght@700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="build/css/app.css">
+</head>
+<body class="bg-success">
+
+    <header class="header container-fluid header-contacto">
+        <div class="container-xl position-relative">
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-md-between">
+                <div class="header-imagen mx-auto">
+                    <img src="build/img/logo.svg" alt="logo cafeteria" class="img-fluid">
+                </div>
+                <!-- <nav class="header-nav d-flex flex-column flex-md-row gap-md-3 pt-5 pt-md-0 text-center">
+                    <a class="text-white fs-2 fw-bold text-uppercase mb-2 mb-md-0" href="index.html ">Inicio</a>
+                    <a class="text-white fs-2 fw-bold text-uppercase mb-2 mb-md-0" href="nosotros.html">Nosotros</a>
+                    <a class="text-white fs-2 fw-bold text-uppercase mb-2 mb-md-0" href="proceso.html">Proceso</a>
+                    <a class="text-white fs-2 fw-bold text-uppercase mb-2 mb-md-0" href="menu.html">Menú</a>
+                    <a class="text-white fs-2 fw-bold text-uppercase mb-2 mb-md-0" href="galeria.html">Galeria</a>
+                    <a class="activo text-white fs-2 fw-bold text-uppercase " href="#">Contacto</a>
+                    <a class="text-white fs-2 fw-bold text-uppercase " href="reservaciones.html">Lista Reservaciones</a>
+                </nav> -->
+
+            </div>
+            <h1 class="header-heading text-white text-uppercase">Mejores granos, mejor café</h1>
+        </div>
+    </header>
+
+
+    <main class="contenedor contenido-principal position-relative bg-white margin-negativo-10">
+        <h2 class="contenido-heading pt-5"><span class="fs-1 fw-bold text-secondary">EDITAR</span> RESERVA</h2>
+       
+        <div class="contenido-contacto px-5 py-5">
+            <form class="formulario" id="formulario">
+                <div class="campo">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" placeholder="Tu Nombre">
+                </div>
+                <div class="campo">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Tu Email">
+                </div>
+                <div class="campo">
+                    <label for="email">Número de Personas:</label>
+                    <!-- <input type="number" id="personas" placeholder="No. personas"> -->
+                    <select id="personas">
+                        <option value="" disabled selected>-- Seleccione --</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="+4">+4</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="hora">Hora:</label>
+                    <input type="time" id="hora" min="09:00" max="18:00">
+                </div>
+
+                <div class="campo">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" min="2022-05-23" max="2022-06-23">
+                </div>
+
+                <input type="hidden" name="id" id="id" value="">
+
+                <div class="campo">
+                    <input type="submit" value="Editar Cliente">
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer bg-primary">
+        <div class="pt-5 contenedor bg-white d-flex flex-column flex-md-row justify-content-md-evenly">
+            <div class="footer-widget text-center">
+                <h3 class="footer-heading text-secondary">UBICACIÓN</h3>
+                <p class="footer-texto">Av. México 3000<span class="d-block">Tepic,Nayarit</span></p>
+            </div>
+            <div class="footer-widget text-center">
+                <h3 class="footer-heading text-secondary">RESERVACIÓN</h3>
+                <p class="footer-texto">Tel. 311-257-60-64<span class="d-block">Llamar</span></p>
+            </div>
+            <div class="footer-widget text-center">
+                <h3 class="footer-heading text-secondary">HORARIO</h3>
+                <p class="footer-texto">Lun-Vie: 10:00 - 21:00
+                <span class="d-block">Sabado: 10:00 - 17:00</span>
+                <span class="d-block">Domingo: Cerrado</span>
+                </p>
+            </div>
+        </div>
+        <p class="footer-copyright text-center text-white">Todos los derechos reservados. La cafetería</p>
+    </footer>
+
+    <!-- <script src="js/app.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/es.min.js" integrity="sha512-tgY2qswcbQir80Vp67s5ZdbKikl99YmVXp3V/C4Acthk4gI29ONbQ+MR8B5tpESkNoa0N1P7HnSuzC6nOflrwA==" crossorigin="anonymous"></script>
+    
+    <script src="js/editarcliente.js"></script>
+    <script src="js/funciones.js"></script>
+</body>
+</html>
