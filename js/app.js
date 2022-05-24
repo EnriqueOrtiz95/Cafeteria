@@ -81,7 +81,7 @@
                         <td class="">    
                             <p class="texto-innerHTML">${fecha}</p>
                         </td>
-                        <td class="d-flex gap-2 d-lg-table-cell">
+                        <td class="d-flex gap-2 flex-wrap d-lg-table-cell">
                             <a href="editar-cliente.html?id=${id}" class="txtEditar mr-3">Editar</a>
                             <a href="#" data-cliente="${id}" class="txtEliminar eliminar">Eliminar</a>
                         </td>
