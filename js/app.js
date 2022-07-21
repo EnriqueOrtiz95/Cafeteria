@@ -1,12 +1,15 @@
 (function(){
-    
+
+    let sorted = false;
     let DB;
+    const btnOrdenar = document.querySelector('.btn-ordenar');
     const listadoClientes = document.querySelector('#listado-clientes');
     //?TAMBIEN PUEDES UTILIZAR window.onload
     document.addEventListener('DOMContentLoaded', () => {
 
         if(window.indexedDB.open('cafeteria', 1)){
             obtenerClientes();
+            
         }
         listadoClientes.addEventListener('click', eliminarRegistro);
     })
@@ -23,15 +26,11 @@
 
             if(confirmar){
                 const transaction = DB.transaction(['cafeteria'], 'readwrite');
-
                 const objectStore = transaction.objectStore('cafeteria');
-
                 objectStore.delete(idEliminar);
-
                 transaction.oncomplete = function(){
                     //?ESTE SE VA AL ELEMENTO PADRE Y DESDE ALLI ELIMINAMOS EL ELEMENTO
                     e.target.parentElement.parentElement.remove();
-                    
                     alert('Cliente eliminado');
                 }
                 transaction.onerror = function(){
@@ -42,11 +41,8 @@
         }
     }
 
-
-    //*ESTE ES EL R DE "READ";
     function obtenerClientes(){
         const abrirConexion = window.indexedDB.open('cafeteria', 1);
-
         abrirConexion.onerror = function (){
             console.log('hubo un error');
         };
@@ -58,11 +54,8 @@
         
             objectStore.openCursor().onsuccess = function(e){
                 const cursor = e.target.result;
-
                 if(cursor){
-                    // console.log(cursor.value);
                     const { nombre, email, personas, hora, fecha, id} = cursor.value;
-
                     listadoClientes.innerHTML +=  
                     `                    
                     <tr>
@@ -88,14 +81,79 @@
                     </tr>
                     `;
 
+                    // fechas.push(new Date(fecha));
                     cursor.continue();
                 }else{
                     console.log('No hay mas registros');
+                    // fechas.sort((a,b) => a - b)
+                    // console.log(fechas);
+                    
                 }
             }
-
         }
     }
+    btnOrdenar.addEventListener('click', function(e){
+        e.preventDefault();
+        if(!(this.classList.contains('active'))){
+            const abrirConexion = window.indexedDB.open('cafeteria', 1);
+            abrirConexion.onerror = function (){
+                console.log('hubo un error');
+            };
+            
+            abrirConexion.onsuccess = function(){
+                DB = abrirConexion.result;
+
+                const objectStore = DB.transaction('cafeteria').objectStore('cafeteria');
+                
+                let idx = objectStore.index('fecha')
+                let getReq = idx.getAll();
+                getReq.onsuccess = function(e){
+                    let cursor = e.target.result;
+                    if(cursor){
+                        // console.log(cursor.value.fecha)
+                        // console.log(cursor.value);
+                        listadoClientes.innerHTML = cursor.map(curs => {
+                            const { nombre, email, personas, hora, fecha, id} = curs;
+                            return `                    
+                            <tr>
+                                <td class="">
+                                    <p class="texto-innerHTML"> ${nombre} </p>
+                                </td>
+                                <td class="">
+                                    <p class="texto-innerHTML"> ${email} </p>
+                                </td>
+                                <td class="">
+                                    <p class="texto-innerHTML">${personas}</p>
+                                </td>
+                                <td class="">    
+                                    <p class="texto-innerHTML">${hora}</p>
+                                </td>
+                                <td class="">    
+                                    <p class="texto-innerHTML">${fecha}</p>
+                                </td>
+                                <td class="d-flex gap-2 flex-wrap d-lg-table-cell">
+                                    <a href="editar-cliente.html?id=${id}" class="txtEditar mr-3">Editar</a>
+                                    <a href="#" data-cliente="${id}" class="txtEliminar eliminar">Eliminar</a>
+                                </td>
+                            </tr>
+                            ` 
+                        })  
+                    }else{
+                        console.log('No hay mas registros');
+                    }
+                }
+            }
+            this.classList.toggle('active');
+            this.textContent = 'Desordenar ↔';
+        }
+        else{
+            listadoClientes.innerHTML = '';
+            obtenerClientes();
+            this.classList.toggle('active');
+            this.textContent = 'Ordenar por fecha';
+        }
+    })    
+
 })();
 
 

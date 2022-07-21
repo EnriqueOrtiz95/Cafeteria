@@ -20,6 +20,9 @@
         crearDB.onupgradeneeded = function(e){
             const db = e.target.result; //?ES EL RESULTADO QUE EJECUTA LA FUNCION
 
+            // if(db.objectStoreNames.contains('cafeteria')){
+            //     db.deleteObjectStore('cafeteria');
+            // }
             const objectStore = db.createObjectStore('cafeteria', {
                 keyPath: 'id',
                 autoIncrement: true
